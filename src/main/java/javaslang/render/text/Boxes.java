@@ -11,15 +11,19 @@ public final class Boxes {
     }
 
     public static <T> Box box(Tree<T> tree) {
+        return box(tree, true);
+    }
+
+    private static <T> Box box(Tree<T> tree, boolean isRoot) {
         Objects.requireNonNull(tree, "tree is null");
         if (tree.isEmpty()) {
             return Box.of("▣");
         }
-        final Box b = Box.of(tree.getValue().toString()).frame();
+        final Box b = Box.of(tree.getValue().toString()).frame(isRoot, tree.isLeaf());
         if (tree.isLeaf()) {
             return b;
         }
-        final List<Box> lst = tree.getChildren().map(Boxes::box);
+        final List<Box> lst = tree.getChildren().map(t -> box(t, false));
         return b.connect(lst);
     }
 }

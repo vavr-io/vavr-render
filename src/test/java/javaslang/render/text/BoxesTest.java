@@ -20,32 +20,35 @@ public class BoxesTest {
                         Tree.of("Mary",
                                 Tree.of("John",
                                         Tree.of("Avila")),
-                                Tree.of("Karen"),
+                                Tree.of("Karen",
+                                        Tree.of("Frank")),
                                 Tree.of("Steven\nAbbot\nBraddock")),
                         Tree.of("Peter",
                                 Tree.of("Paul\nPalucci"),
-                                Tree.of("Anthony")));
+                                Tree.of("Anthony")),
+                        Tree.of("Christopher",
+                                Tree.of("Samuel")));
 
         final String lispString = tree.toString().replaceAll("\n", " ");
-        assertThat(lispString).isEqualTo("(Ann (Mary (John Avila) Karen Steven Abbot Braddock) (Peter Paul Palucci Anthony))");
+        assertThat(lispString).isEqualTo("(Ann (Mary (John Avila) (Karen Frank) Steven Abbot Braddock) (Peter Paul Palucci Anthony) (Christopher Samuel))");
 
         final String boxesString = Boxes.box(tree).toString();
         assertThat(boxesString).isEqualTo("" +
-                "                     ┌───┐                     \n" +
-                "                     │Ann│                     \n" +
-                "                     └───┘                     \n" +
-                "             ┌─────────┴─────────────┐         \n" +
-                "          ┌────┐                  ┌─────┐      \n" +
-                "          │Mary│                  │Peter│      \n" +
-                "          └────┘                  └─────┘      \n" +
-                "   ┌───────┬─┴───────┐          ┌────┴────┐    \n" +
-                "┌────┐  ┌─────┐ ┌────────┐  ┌───────┐ ┌───────┐\n" +
-                "│John│  │Karen│ │ Steven │  │ Paul  │ │Anthony│\n" +
-                "└────┘  └─────┘ │ Abbot  │  │Palucci│ └───────┘\n" +
-                "  │             │Braddock│  └───────┘          \n" +
-                "┌─────┐         └────────┘                     \n" +
-                "│Avila│                                        \n" +
-                "└─────┘                                        "
+                "                            ┌───┐                            \n" +
+                "                            │Ann│                            \n" +
+                "                            └─┬─┘                            \n" +
+                "             ┌────────────────┴──────┬────────────────┐      \n" +
+                "          ┌──┴─┐                  ┌──┴──┐       ┌─────┴─────┐\n" +
+                "          │Mary│                  │Peter│       │Christopher│\n" +
+                "          └──┬─┘                  └──┬──┘       └─────┬─────┘\n" +
+                "   ┌───────┬─┴───────┐          ┌────┴────┐           │      \n" +
+                "┌──┴─┐  ┌──┴──┐ ┌────┴───┐  ┌───┴───┐ ┌───┴───┐   ┌───┴──┐   \n" +
+                "│John│  │Karen│ │ Steven │  │ Paul  │ │Anthony│   │Samuel│   \n" +
+                "└──┬─┘  └──┬──┘ │ Abbot  │  │Palucci│ └───────┘   └──────┘   \n" +
+                "   │       │    │Braddock│  └───────┘                        \n" +
+                "┌──┴──┐ ┌──┴──┐ └────────┘                                   \n" +
+                "│Avila│ │Frank│                                              \n" +
+                "└─────┘ └─────┘                                              "
         );
     }
 }
