@@ -30,7 +30,7 @@ public class BoxesTest {
                                 Tree.of("Samuel")));
 
         final String lispString = tree.toString().replaceAll("\n", " ");
-        assertThat(lispString).isEqualTo("(Ann (Mary (John Avila) (Karen Frank) Steven Abbot Braddock) (Peter Paul Palucci Anthony) (Christopher Samuel))");
+        assertThat(lispString).isEqualTo("Tree(Ann (Mary (John Avila) (Karen Frank) Steven Abbot Braddock) (Peter Paul Palucci Anthony) (Christopher Samuel))");
 
         final String boxesString = Boxes.box(tree).toString();
         assertThat(boxesString).isEqualTo("" +
