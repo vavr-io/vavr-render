@@ -80,17 +80,21 @@ public abstract class Box {
             return Box.col(this, Box.of('│'), list.get(0));
         }
         StringBuffer buffer = new StringBuffer();
-        int p = list.get(0).width() / 2;
-        buffer.append(replicate(' ', p)).append('┌').append(replicate('─', p));
+        int w0 = list.get(0).width();
+        int w0a = w0 / 2;
+        buffer.append(replicate(' ', w0a)).append('┌').append(replicate('─', w0 - w0a - 1));
         for (int i = 1; i < list.length() - 1; i++) {
             Box b = list.get(i);
-            p = b.width() / 2;
-            buffer.append(replicate('─', p + 1)).append('┬')
-                    .append(replicate('─', p));
+            w0 = b.width();
+            w0a = w0 / 2;
+            buffer.append(replicate('─', w0a + 1)).append('┬')
+                    .append(replicate('─', w0 - w0a - 1));
         }
-        p = list.get(list.length() - 1).width() / 2;
-        buffer.append(replicate('─', p + 1)).append('┐').append(replicate(' ', p));
-        p = buffer.length() / 2;
+        w0 = list.get(list.length() - 1).width();
+        w0a = w0 / 2;
+        buffer.append(replicate('─', w0a + 1)).append('┐').append(replicate(' ', w0 - w0a - 1));
+        boolean box_has_even_width = width() % 2 == 0;
+        int p = (buffer.length() - (box_has_even_width ? 0 : 1)) / 2;
         char c = buffer.charAt(p);
         buffer.setCharAt(p, c == '─' ? '┴' : '┼');
 
@@ -116,7 +120,7 @@ public abstract class Box {
         for (int i = 0; i < n; i++) {
             buffer.append(c);
         }
-        buffer.setCharAt(n / 2, connector);
+        buffer.setCharAt((n-1) / 2, connector);
         return buffer.toString();
     }
 
