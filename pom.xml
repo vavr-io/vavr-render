@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>9</version>
     </parent>
-    <groupId>com.javaslang</groupId>
+
+    <groupId>io.javaslang</groupId>
     <artifactId>javaslang-render</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <url>http://javaslang.com</url>
+    <url>http://javaslang.io</url>
+    <name>Javaslang-render</name>
+    <description>A rendering module for Javaslang</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <scm>
-        <connection>scm:git:git://github.com/javaslang/javaslang-render.git</connection>
-        <developerConnection>scm:git:git@github.com/javaslang/javaslang-render.git</developerConnection>
-        <url>https://github.com/javaslang/javaslang-render</url>
+        <connection>scm:git:git@github.com:javaslang/javaslang-render.git</connection>
+        <developerConnection>scm:git:git@github.com:javaslang/javaslang-render.git</developerConnection>
+        <url>git@github.com:javaslang/javaslang-render.git</url>
+        <tag>HEAD</tag>
     </scm>
+
     <developers>
         <developer>
             <id>romildo</id>
@@ -25,19 +35,24 @@
             <email>malaquias@gmail.com</email>
         </developer>
     </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <assertj.core.version>3.2.0</assertj.core.version>
+        <assertj.core.version>3.5.2</assertj.core.version>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
-        <javaslang.version>2.0.0-RC4</javaslang.version>
+        <javaslang.version>2.0.2</javaslang.version>
         <maven.compiler.version>3.2</maven.compiler.version>
-        <maven.jacoco.version>0.7.2.201409121644</maven.jacoco.version>
+        <maven.coveralls.version>4.0.0</maven.coveralls.version>
+        <maven.jacoco.version>0.7.5.201505241946</maven.jacoco.version>
+        <maven.gpg.version>1.5</maven.gpg.version>
+        <maven.release.version>2.5.1</maven.release.version>
         <maven.versions.version>2.1</maven.versions.version>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>com.javaslang</groupId>
+            <groupId>io.javaslang</groupId>
             <artifactId>javaslang</artifactId>
             <version>${javaslang.version}</version>
         </dependency>
@@ -54,6 +69,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -68,6 +84,8 @@
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
                         <arg>-Werror</arg>
+                        <!-- Workaround for JDK bug https://bugs.openjdk.java.net/browse/JDK-6999068 -->
+                        <arg>-Xlint:-processing</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -77,6 +95,22 @@
                 <version>${maven.versions.version}</version>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven.release.version}</version>
+                    <configuration>
+                        <!-- Circumvent maven-gpg-plugin bug -->
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <!-- Honor arguments passed via command line -->
+                        <arguments>${arguments} -Psonatype-oss-release</arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
     <profiles>
         <!-- A profile for code coverage analysis in ci environments -->
@@ -111,45 +145,33 @@
                 </plugins>
             </build>
         </profile>
-        <!-- A profile for eliminating eclipse m2e warnings -->
+        <!-- A profile for gpg-signing .jars when releasing -->
         <profile>
-            <id>eclipse-m2e</id>
+            <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <name>m2e.version</name>
+                    <!-- Automatically set to true on mvn release:perform -->
+                    <name>performRelease</name>
+                    <value>true</value>
                 </property>
             </activation>
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.eclipse.m2e</groupId>
-                            <artifactId>lifecycle-mapping</artifactId>
-                            <version>${eclipse.lifecycle.mapping.version}</version>
-                            <configuration>
-                                <lifecycleMappingMetadata>
-                                    <pluginExecutions>
-                                        <!-- Elimate the eclipse warning 'maven-enforcer-plugin (goal "enforce")
-                                            is ignored by m2e' -->
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.apache.maven.plugins</groupId>
-                                                <artifactId>maven-enforcer-plugin</artifactId>
-                                                <versionRange>[0,)</versionRange>
-                                                <goals>
-                                                    <goal>enforce</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore/>
-                                            </action>
-                                        </pluginExecution>
-                                    </pluginExecutions>
-                                </lifecycleMappingMetadata>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
     </profiles>
