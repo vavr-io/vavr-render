@@ -156,7 +156,7 @@ public abstract class Box {
             w = width;
             h = height;
             String s = replicate(c, width);
-            contents = Stream.gen(() -> s).take(height).toJavaArray(String.class);
+            contents = Stream.continually(s).take(height).toJavaArray(String.class);
         }
 
         @Override
