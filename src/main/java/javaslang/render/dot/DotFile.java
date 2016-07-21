@@ -2,6 +2,9 @@ package javaslang.render.dot;
 
 import javaslang.collection.Tree;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,16 @@ public class DotFile {
 
     public static DotFile create(Tree<?> tree) {
         return new DotFile(tree);
+    }
+
+    public static void write(Tree<?> tree, File file) throws IOException {
+        FileWriter writer = new FileWriter(file);
+        writer.write(create(tree).toString());
+        writer.close();
+    }
+
+    public static void write(Tree<?> tree, String fileName) throws IOException {
+        write(tree, new File(fileName));
     }
 
     private final Map<String, String> labels = new HashMap<>();
