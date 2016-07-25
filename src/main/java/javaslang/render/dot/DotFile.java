@@ -34,7 +34,7 @@ public class DotFile {
     private final Map<String, String> labels = new HashMap<>();
     private final List<String> edges = new ArrayList<>();
 
-    private String name = "graph";
+    private String name = "Tree";
 
     private DotFile(Tree<?> tree) {
         processTree(tree, null, 0);
