@@ -16,7 +16,7 @@ public class PrettyPrinter {
         Objects.requireNonNull(tree, "tree is null");
         if (tree.isEmpty()) { return "▣"; }
         final StringBuilder builder = new StringBuilder();
-        prettyPrint((Tree.Node) tree, "", "", builder);
+        prettyPrint((Tree.Node<T>) tree, "", "", builder);
         return builder.toString();
     }
 
