@@ -1,6 +1,6 @@
-package javaslang.render.swing;
+package io.vavr.render.swing;
 
-import javaslang.collection.Tree;
+import io.vavr.collection.Tree;
 import org.junit.Test;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -23,7 +23,7 @@ public class TreeTest {
                                 Tree.of("Paul\nPalucci"),
                                 Tree.of("Anthony")));
 
-        final DefaultMutableTreeNode t = javaslang.render.swing.Tree.create(tree);
+        final DefaultMutableTreeNode t = io.vavr.render.swing.Tree.create(tree);
         @SuppressWarnings("rawtypes")
         final Enumeration v = t.preorderEnumeration();
         final StringBuilder builder = new StringBuilder();

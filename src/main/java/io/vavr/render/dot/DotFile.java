@@ -1,6 +1,12 @@
-package javaslang.render.dot;
+/*                        __    __  __  __    __  ___
+ *                       \  \  /  /    \  \  /  /  __/
+ *                        \  \/  /  /\  \  \/  /  /
+ *                         \____/__/  \__\____/__/.ɪᴏ
+ * ᶜᵒᵖʸʳᶦᵍʰᵗ ᵇʸ ᵛᵃᵛʳ ⁻ ˡᶦᶜᵉⁿˢᵉᵈ ᵘⁿᵈᵉʳ ᵗʰᵉ ᵃᵖᵃᶜʰᵉ ˡᶦᶜᵉⁿˢᵉ ᵛᵉʳˢᶦᵒⁿ ᵗʷᵒ ᵈᵒᵗ ᶻᵉʳᵒ
+ */
+package io.vavr.render.dot;
 
-import javaslang.collection.Tree;
+import io.vavr.collection.Tree;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Creates .dot representation of Javaslang Tree.
+ * Creates .dot representation of Vavr Tree.
  * <p>
  * See <a href="http://www.graphviz.org/">Graphviz</a>
  */

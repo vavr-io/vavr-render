@@ -7,13 +7,13 @@
         <version>9</version>
     </parent>
 
-    <groupId>io.javaslang</groupId>
-    <artifactId>javaslang-render</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <groupId>io.vavr</groupId>
+    <artifactId>vavr-render</artifactId>
+    <version>0.9.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <url>http://javaslang.io</url>
-    <name>Javaslang-render</name>
-    <description>A rendering module for Javaslang</description>
+    <url>http://vavr.io</url>
+    <name>vavr-render</name>
+    <description>A rendering module for Vavr.io</description>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -22,9 +22,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git@github.com:javaslang/javaslang-render.git</connection>
-        <developerConnection>scm:git:git@github.com:javaslang/javaslang-render.git</developerConnection>
-        <url>git@github.com:javaslang/javaslang-render.git</url>
+        <connection>scm:git:git@github.com:vavr-io/vavr-render.git</connection>
+        <developerConnection>scm:git:git@github.com:vavr-io/vavr-render.git</developerConnection>
+        <url>git@github.com:vavr-io/vavr-render.git</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -41,7 +41,7 @@
         <assertj.core.version>3.5.2</assertj.core.version>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
-        <javaslang.version>2.0.4</javaslang.version>
+        <vavr.version>0.9.0</vavr.version>
         <maven.compiler.version>3.2</maven.compiler.version>
         <maven.coveralls.version>4.0.0</maven.coveralls.version>
         <maven.jacoco.version>0.7.5.201505241946</maven.jacoco.version>
@@ -52,9 +52,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.javaslang</groupId>
-            <artifactId>javaslang</artifactId>
-            <version>${javaslang.version}</version>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>${vavr.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

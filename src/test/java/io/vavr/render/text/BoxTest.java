@@ -1,11 +1,12 @@
-/*     / \____  _    _  ____   ______  / \ ____  __    _ _____
- *    /  /    \/ \  / \/    \ /  /\__\/  //    \/  \  / /  _  \   Javaslang
- *  _/  /  /\  \  \/  /  /\  \\__\\  \  //  /\  \ /\\/  \__/  /   Copyright 2014-now Daniel Dietrich
- * /___/\_/  \_/\____/\_/  \_/\__\/__/___\_/  \_//  \__/_____/    Licensed under the Apache License, Version 2.0
+/*                        __    __  __  __    __  ___
+ *                       \  \  /  /    \  \  /  /  __/
+ *                        \  \/  /  /\  \  \/  /  /
+ *                         \____/__/  \__\____/__/.ɪᴏ
+ * ᶜᵒᵖʸʳᶦᵍʰᵗ ᵇʸ ᵛᵃᵛʳ ⁻ ˡᶦᶜᵉⁿˢᵉᵈ ᵘⁿᵈᵉʳ ᵗʰᵉ ᵃᵖᵃᶜʰᵉ ˡᶦᶜᵉⁿˢᵉ ᵛᵉʳˢᶦᵒⁿ ᵗʷᵒ ᵈᵒᵗ ᶻᵉʳᵒ
  */
-package javaslang.render.text;
+package io.vavr.render.text;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ public class BoxTest {
         final Box b3 = Box.of("|we are happy today|");
         final Box b4 = Box.of("happy\nnew\nyear");
         final Box b5 = Box.of("Alexander\nis\na\ngood\nman", Box.HAlignment.LEFT);
-        final Box b6 = Box.of("Javaslang\nis\na\nfunctional\nlibrary\nfor\nJava\n8+", Box.HAlignment.RIGHT);
+        final Box b6 = Box.of("Vavr\nis\na\nfunctional\nlibrary\nfor\nJava\n8+", Box.HAlignment.RIGHT);
 
         assertThat(b1.toString()).isEqualTo("@");
 
@@ -45,7 +46,7 @@ public class BoxTest {
                 "man      ");
 
         assertThat(b6.toString()).isEqualTo("" +
-                " Javaslang\n" +
+                "      Vavr\n" +
                 "        is\n" +
                 "         a\n" +
                 "functional\n" +

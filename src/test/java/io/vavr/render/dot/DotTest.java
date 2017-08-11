@@ -1,6 +1,7 @@
-package javaslang.render.dot;
+package io.vavr.render.dot;
 
-import javaslang.collection.Tree;
+import io.vavr.render.dot.DotFile;
+import io.vavr.collection.Tree;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
