@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/javaslang/javaslang-render.svg?branch=master)](https://travis-ci.org/javaslang/javaslang-render)
-[![Coverage Status](https://codecov.io/github/javaslang/javaslang-render/coverage.svg?branch=master)](https://codecov.io/github/javaslang/javaslang-render?branch=master)
+[![Build Status](https://travis-ci.org/vavr-io/vavr-render.svg?branch=master)](https://travis-ci.org/vavr-io/vavr-render)
+[![codecov](https://codecov.io/gh/vavr-io/vavr-render/branch/master/graph/badge.svg)](https://codecov.io/gh/vavr-io/vavr-render)
 
 # vavr-render
 
